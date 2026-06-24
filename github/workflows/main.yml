@@ -1,1 +1,24 @@
+name: Tactic Fairness Verifier
 
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 將代碼庫檢出至環境
+      - uses: actions/checkout@v4
+      
+      # 2. 設定 Python 環境
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          
+      # 3. 自動執行驗證代碼
+      - name: Run Fairness Verification
+        run: python3 verify_game.py
